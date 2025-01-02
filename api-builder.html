@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Builder - Advanced PHP API Builder</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <div id="background-animation"></div>
+    <header>
+        <nav class="container glossy-nav">
+            <div class="logo">PHP API Builder</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="api-builder.html" class="active">API Builder</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="container main-content">
+        <h1 class="fade-in">API Builder</h1>
+        <div id="initial-setup" class="fade-in">
+            <label for="api-count">Number of API Requests:</label>
+            <input type="number" id="api-count" min="1" max="10" value="1">
+            <button id="start-building" class="pulse-button">Start Building</button>
+        </div>
+        <div id="api-builder" class="hidden">
+            <div id="api-requests"></div>
+            <button id="add-request" class="add-request-btn pop-in">+ Add Request</button>
+            <button id="generate-code" class="generate-code-btn pop-in">Generate PHP Code</button>
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Advanced PHP API Builder. All rights reserved.</p>
+            <nav>
+                <a href="#">Terms of Use</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Contact Us</a>
+            </nav>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
+

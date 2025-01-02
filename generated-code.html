@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="View and download your generated PHP API code">
+    <title>Generated Code - Advanced PHP API Builder</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <div id="background-animation"></div>
+    <a href="#main-content" class="sr-only focus:not-sr-only">Skip to main content</a>
+    
+    <header>
+        <nav class="container glossy-nav">
+            <a href="/" class="logo" aria-label="PHP API Builder Home">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+                <span>PHP API Builder</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="api-builder.html" class="nav-link">API Builder</a></li>
+                <li><a href="#" class="nav-link active">Generated Code</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main-content" class="container" tabindex="-1">
+        <div class="page-header fade-in">
+            <h1>Generated PHP Code</h1>
+            <p class="subtitle">Your API code is ready to use</p>
+        </div>
+
+        <div class="code-output fade-in" role="region" aria-label="Generated PHP code">
+            <div class="code-wrapper">
+                <div class="code-header">
+                    <div class="code-info">
+                        <span class="code-language">PHP</span>
+                        <span class="code-file-info" id="code-stats"></span>
+                    </div>
+                    <div class="code-actions">
+                        <button 
+                            class="action-button tooltip" 
+                            id="copy-code" 
+                            aria-label="Copy code to clipboard"
+                        >
+                            <span class="tooltip-text">Copy to clipboard</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                        </button>
+                        <button 
+                            class="action-button tooltip" 
+                            id="download-code" 
+                            aria-label="Download code as file"
+                        >
+                            <span class="tooltip-text">Download file</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="code-container" role="region" aria-label="Code preview">
+                    <pre><code class="language-php" id="generated-code"></code></pre>
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="button button-primary" id="copy-code-main">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                    <span>Copy Code</span>
+                </button>
+                <button class="button button-secondary" id="download-code-main">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    <span>Download Code</span>
+                </button>
+            </div>
+        </div>
+
+        <div id="toast" role="alert" aria-live="polite" class="toast"></div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2023 PHP API Builder. All rights reserved.</p>
+                <nav aria-label="Footer navigation">
+                    <a href="#" class="footer-link">Terms of Use</a>
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                    <a href="#" class="footer-link">Contact Us</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize 3D background
+            initBackground();
+
+            const generatedCode = document.getElementById('generated-code');
+            const copyCodeBtns = [
+                document.getElementById('copy-code'),
+                document.getElementById('copy-code-main')
+            ];
+            const downloadCodeBtns = [
+                document.getElementById('download-code'),
+                document.getElementById('download-code-main')
+            ];
+            const codeStats = document.getElementById('code-stats');
+
+            // Code retrieval and display
+            const code = sessionStorage.getItem('generatedCode');
+            if (code) {
+                generatedCode.textContent = code;
+                hljs.highlightElement(generatedCode);
+                
+                // Update code stats
+                const lines = code.split('\n').length;
+                codeStats.textContent = `${lines} lines`;
+            } else {
+                generatedCode.textContent = 'No generated code found. Please go back to the API Builder and generate the code.';
+            }
+
+            // Copy functionality
+            const copyCode = async () => {
+                try {
+                    await navigator.clipboard.writeText(generatedCode.textContent);
+                    showToast('Code copied to clipboard!', 'success');
+                } catch (err) {
+                    console.error('Error copying code:', err);
+                    showToast('Failed to copy code', 'error');
+                }
+            };
+
+            copyCodeBtns.forEach(btn => btn?.addEventListener('click', copyCode));
+
+            // Download functionality
+            const downloadCode = () => {
+                try {
+                    const blob = new Blob([generatedCode.textContent], { type: 'text/plain' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'generated_api_code.php';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                    showToast('Code downloaded successfully!', 'success');
+                } catch (err) {
+                    console.error('Error downloading code:', err);
+                    showToast('Failed to download code', 'error');
+                }
+            };
+
+            downloadCodeBtns.forEach(btn => btn?.addEventListener('click', downloadCode));
+
+            // Toast notification system
+            const showToast = (message, type = 'success') => {
+                const toast = document.getElementById('toast');
+                toast.textContent = message;
+                toast.className = `toast ${type} show`;
+                
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000);
+            };
+
+            // 3D Background Animation
+            function initBackground() {
+                const scene = new THREE.Scene();
+                const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+                
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                document.getElementById('background-animation').appendChild(renderer.domElement);
+
+                // Create multiple cubes
+                const cubes = [];
+                const cubeCount = 20;
+
+                for (let i = 0; i < cubeCount; i++) {
+                    const geometry = new THREE.BoxGeometry(1, 1, 1);
+                    const material = new THREE.MeshBasicMaterial({
+                        color: 0x3f51b5,
+                        wireframe: true,
+                        transparent: true,
+                        opacity: 0.3
+                    });
+                    const cube = new THREE.Mesh(geometry, material);
+                    
+                    // Random position
+                    cube.position.x = (Math.random() - 0.5) * 20;
+                    cube.position.y = (Math.random() - 0.5) * 20;
+                    cube.position.z = (Math.random() - 0.5) * 20;
+                    
+                    // Random rotation speed
+                    cube.userData.rotationSpeed = {
+                        x: (Math.random() - 0.5) * 0.02,
+                        y: (Math.random() - 0.5) * 0.02,
+                        z: (Math.random() - 0.5) * 0.02
+                    };
+
+                    cubes.push(cube);
+                    scene.add(cube);
+                }
+
+                camera.position.z = 15;
+
+                function animate() {
+                    requestAnimationFrame(animate);
+                    
+                    cubes.forEach(cube => {
+                        cube.rotation.x += cube.userData.rotationSpeed.x;
+                        cube.rotation.y += cube.userData.rotationSpeed.y;
+                        cube.rotation.z += cube.userData.rotationSpeed.z;
+                    });
+
+                    renderer.render(scene, camera);
+                }
+
+                animate();
+
+                // Handle window resize
+                window.addEventListener('resize', () => {
+                    camera.aspect = window.innerWidth / window.innerHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(window.innerWidth, window.innerHeight);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+
